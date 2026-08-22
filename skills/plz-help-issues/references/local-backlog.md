@@ -21,8 +21,6 @@ backlog/
 ├── BACKLOG.md              순서만 담당하는 색인
 ├── epics/
 │   └── EP-001-회원-관리.md
-├── features/
-│   └── FT-003-소셜-로그인.md
 ├── stories/
 │   └── ST-014-카카오로-로그인한다.md
 └── tasks/
@@ -36,7 +34,6 @@ backlog/
 | 계층 | 접두어 | 디렉터리 |
 |---|---|---|
 | Epic | `EP-` | `epics/` |
-| Feature | `FT-` | `features/` |
 | Story | `ST-` | `stories/` |
 | Task | `TA-` | `tasks/` |
 
@@ -55,7 +52,7 @@ backlog/
 ---
 id: ST-014
 type: story
-parent: FT-003
+parent: EP-002
 status: open
 labels: [domain:auth]
 ---
@@ -80,7 +77,7 @@ labels: [domain:auth]
 | 필드 | 필수 | 값 |
 |---|---|---|
 | `id` | 예 | 파일명의 ID 와 같아야 한다 |
-| `type` | 예 | `epic` \| `feature` \| `story` \| `task` |
+| `type` | 예 | `epic` \| `story` \| `task` |
 | `parent` | Story 는 필수 | 부모의 ID. 최상위 Epic 과 단독 Task 는 비운다 |
 | `status` | 예 | `open` \| `in-progress` \| `closed` |
 | `track` | Epic 은 필수 | `discovery` \| `delivery`. 플랫폼에서는 라벨 `track:*` 에 해당한다 |
@@ -104,7 +101,7 @@ Epic 이 아닌 항목은 `track` 을 적지 않아도 된다. 부모를 따라 
 
 ## 진행 중
 
-- [FT-003 소셜 로그인](features/FT-003-소셜-로그인.md)
+- [EP-002 소셜 로그인 붙이기](epics/EP-002-소셜-로그인-붙이기.md)
 
 ## 다음 — 곱게 다듬음
 
@@ -113,7 +110,7 @@ Epic 이 아닌 항목은 `track` 을 적지 않아도 된다. 부모를 따라 
 
 ## 나중 — 거칠게
 
-- [FT-007 알림 받기](features/FT-007-알림-받기.md)
+- 알림 받기 (아직 항목 없음)
 - 비밀번호 찾기 (아직 항목 없음)
 
 ## 닫힘
@@ -129,8 +126,8 @@ Epic 이 아닌 항목은 `track` 을 적지 않아도 된다. 부모를 따라 
 플랫폼의 필터를 대신한다.
 
 ```sh
-# FT-003 의 자식 전부
-grep -rl "^parent: FT-003" backlog/
+# EP-002 의 자식 전부
+grep -rl "^parent: EP-002" backlog/
 
 # 고아 스토리 — parent 가 없는 것
 grep -rL "^parent:" backlog/stories/
@@ -155,7 +152,7 @@ grep -rl "## 남은 질문" backlog/tasks/
 
 나중에 remote 가 붙으면 항목 파일이 이슈 하나로 그대로 매핑된다.
 
-1. 상위 계층부터 발행한다 (Epic → Feature → Story → Task). 부모가 먼저 있어야
+1. 상위 계층부터 발행한다 (Epic → Story → Task). 부모가 먼저 있어야
    자식이 링크를 걸 수 있다.
 2. 발행할 때마다 원본 파일 앞머리에 `remote: owner/repo#42` 를 적는다.
 3. 전부 옮긴 뒤 `parent` 필드의 로컬 ID 를 플랫폼 번호로 바꾼다.
