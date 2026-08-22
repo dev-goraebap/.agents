@@ -26,7 +26,7 @@ backlog/
 ├── stories/
 │   └── ST-014-카카오로-로그인한다.md
 └── tasks/
-    └── TK-021-로그인-화면-프로토타입.md
+    └── TA-021-로그인-화면-프로토타입.md
 ```
 
 **항목 하나에 파일 하나.** 플랫폼의 이슈 하나에 대응하므로 나중에 그대로 옮길 수 있다.
@@ -38,9 +38,14 @@ backlog/
 | Epic | `EP-` | `epics/` |
 | Feature | `FT-` | `features/` |
 | Story | `ST-` | `stories/` |
-| Task | `TK-` | `tasks/` |
+| Task | `TA-` | `tasks/` |
 
 번호는 계층별로 따로 매기고 재사용하지 않는다. 항목을 폐기해도 번호는 비워 둔다.
+
+**접두어는 프로젝트마다 다를 수 있다.** 도메인 ID 로 이미 같은 접두어를 쓰는
+프로젝트가 있다. 예를 들어 작업(Task) 도메인을 다루는 제품은 유스케이스 ID 로
+`TK-001` 을 쓰고 있을 수 있다. `kickoff` 1단계에서 위 표를 보여주고 충돌 여부를
+확인한 뒤, 겹치면 비켜 간다. 정한 접두어는 `BACKLOG.md` 맨 위에 적어 둔다.
 
 ## 항목 파일
 
@@ -78,9 +83,13 @@ labels: [domain:auth]
 | `type` | 예 | `epic` \| `feature` \| `story` \| `task` |
 | `parent` | Story 는 필수 | 부모의 ID. 최상위 Epic 과 단독 Task 는 비운다 |
 | `status` | 예 | `open` \| `in-progress` \| `closed` |
+| `track` | Epic 은 필수 | `discovery` \| `delivery`. 플랫폼에서는 라벨 `track:*` 에 해당한다 |
 | `labels` | 아니오 | `domain:*` 등. 플랫폼 라벨과 같은 어휘를 쓴다 |
 | `remote` | 아니오 | 플랫폼에 옮긴 뒤 대응을 기록한다 (`owner/repo#42`) |
 | `spike` | 아니오 | Task 가 스파이크면 `true`. 완료 조건을 본문에 적는다 |
+
+Epic 이 아닌 항목은 `track` 을 적지 않아도 된다. 부모를 따라 올라가면 어느
+트랙인지 알 수 있다. 다만 스파이크 Task 처럼 트랙이 헷갈릴 여지가 있으면 적는다.
 
 우선순위는 **필드로 두지 않는다.** `BACKLOG.md` 의 목록 순서가 우선순위다.
 숫자로 두면 항목 하나를 끼워넣을 때마다 전부 다시 매겨야 한다.
@@ -109,7 +118,7 @@ labels: [domain:auth]
 
 ## 닫힘
 
-- [TK-021 로그인 화면 프로토타입](tasks/TK-021-로그인-화면-프로토타입.md)
+- [TA-021 로그인 화면 프로토타입](tasks/TA-021-로그인-화면-프로토타입.md)
 ```
 
 "위는 곱게, 아래는 거칠게" 원칙이 그대로 구획이 된다. **나중 구획은 항목 파일이
@@ -131,6 +140,12 @@ grep -rl "^status: open" backlog/
 
 # 특정 도메인
 grep -rl "domain:auth" backlog/
+
+# 열려 있는 발견 에픽 — 지금 무엇을 정하는 중인가
+grep -rl "^track: discovery" backlog/epics/ | xargs grep -l "^status: open"
+
+# 남은 질문이 있는 스파이크
+grep -rl "## 남은 질문" backlog/tasks/
 ```
 
 **끊어진 부모 링크**는 두 단계로 찾는다. 각 파일의 `parent` 값을 모아, 그 ID 를
