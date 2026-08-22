@@ -1,0 +1,9 @@
+{
+  "name": "claude-hook-notify-setup-scripts",
+  "version": "1.0.0",
+  "description": "Claude Code hook notification scripts",
+  "main": "notify.js",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  }
+}

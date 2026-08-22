@@ -1,0 +1,14 @@
+# 서드파티 스킬은 추적하지 않는다 (npx skills 로 재설치).
+# 디렉터리 자체를 무시하면 하위 예외(!)가 동작하지 않으므로 `skills/*`로 둔다.
+skills/*
+
+# 직접 만든 스킬만 예외로 추적한다.
+!skills/claude-hook-notify-setup/
+!skills/pg-query/
+
+# 설치 상태는 머신마다 다르고(lastSelectedAgents 등) 서드파티 스킬 메타데이터만
+# 담고 있어 추적하지 않는다.
+.skill-lock.json
+
+# 스킬 스크립트가 설치한 의존성
+node_modules/
