@@ -6,6 +6,7 @@ skills/*
 !skills/claude-hook-notify-setup/
 !skills/pg-query/
 !skills/plz-help-issues/
+!skills/ask-agy-to-write/
 
 # 설치 상태는 머신마다 다르고(lastSelectedAgents 등) 서드파티 스킬 메타데이터만
 # 담고 있어 추적하지 않는다.
@@ -16,3 +17,5 @@ node_modules/
 
 # 개인 작업 노트
 *.local.md
+
+tmp
